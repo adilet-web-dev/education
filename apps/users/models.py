@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 from config.settings import BASE_DIR
+from apps.courses.models import Course
+
 
 with open(f"{BASE_DIR}/professions.json", "r") as file:
     PROFESSION_CHOICES = list(json.loads(file.read()).items())
@@ -21,4 +23,4 @@ class TeacherProfile(models.Model):
 
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    courses = models.ManyToManyField(Course, related_name="students")
