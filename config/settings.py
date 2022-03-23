@@ -45,8 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party
     'rest_framework',
+    'rest_registration',
     # local
-    'apps.courses.apps.CoursesConfig'
+    'apps.courses.apps.CoursesConfig',
+    'apps.users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
@@ -105,6 +107,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_URL': 'http://localhost:8000/verify-user/',
+    'RESET_PASSWORD_VERIFICATION_URL': 'http://localhost:8000/reset-password/',
+    'REGISTER_EMAIL_VERIFICATION_URL': 'http://localhost:8000/verify-email/',
+
+    'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
+}
+
+AUTH_USER_MODEL = "users.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
