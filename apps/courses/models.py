@@ -1,11 +1,10 @@
+import json
+
 from django.db import models
+from config.settings import BASE_DIR
 
-
-PROFESSION_CHOICES = [
-    ("programmer", "Programmer"),
-    ("designer", "Designer"),
-    ("manager", "Manager")
-]
+with open(f"{BASE_DIR}/professions.json", "r") as file:
+    PROFESSION_CHOICES = list(json.loads(file.read()).items())
 
 
 class Course(models.Model):
