@@ -1,6 +1,6 @@
-[
-  "manager",
-  "programmer",
-  "designer",
-  "quality assurer"
-]
+{
+  "manager": "Manager",
+  "programmer": "Programmer",
+  "designer": "Designer",
+  "quality assurer": "Quality assurer"
+}
