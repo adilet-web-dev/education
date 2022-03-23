@@ -16,7 +16,7 @@ class CourseViewSet(ModelViewSet):
     @action(methods=["POST"], detail=True, url_path="subscribe")
     def subscribe_course(self, *args, **kwargs):
         course = self.get_object()
+
         self.request.user.studentprofile.courses.add(course)
 
         return Response(status=status.HTTP_200_OK)
-

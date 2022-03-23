@@ -12,6 +12,8 @@ django-extensions = "*"
 python-dotenv = "*"
 dj-database-url = "*"
 drf-yasg = "*"
+httmock = "*"
+requests = "*"
 
 [dev-packages]
 
