@@ -4,7 +4,7 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 
 from config.settings import BASE_DIR
-from apps.users.models import StudentProfile
+from apps.users.models import Profile
 
 
 with open(f"{BASE_DIR}/professions.json", "r") as file:
@@ -16,6 +16,12 @@ class Course(models.Model):
     description = models.TextField()
     profession = models.CharField(max_length=50, choices=PROFESSION_CHOICES)
     cost = models.PositiveIntegerField()
+
+    author = models.ForeignKey(
+        Profile,
+        related_name="my_courses",
+        on_delete=models.CASCADE
+    )
 
     cover_image = models.ImageField(
         upload_to='images/covers/',
@@ -41,7 +47,7 @@ class HomeworkTask(models.Model):
         related_name="courses",
         on_delete=models.CASCADE
     )
-    stage = models.PositiveIntegerField()
+    stage = models.PositiveIntegerField(default=0)
     name = models.CharField(max_length=255)
 
     description = models.TextField()
@@ -66,10 +72,12 @@ class Homework(models.Model):
     )
 
     student = models.ForeignKey(
-        StudentProfile,
+        Profile,
         related_name="homeworks",
         on_delete=models.CASCADE
     )
+
+    text = models.TextField()
 
     files = models.FileField(
         upload_to='homeworks/',

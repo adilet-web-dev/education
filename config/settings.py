@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     # local
-    'apps.courses.apps.CoursesConfig'
+    'apps.courses.apps.CoursesConfig',
+    'apps.users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
@@ -106,6 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "users.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
