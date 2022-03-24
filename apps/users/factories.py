@@ -1,6 +1,6 @@
 import factory
 from django.db.models.signals import post_save
-from .models import User, PROFESSION_CHOICES
+from .models import User, PROFESSION_CHOICES, Profile
 from factory.fuzzy import FuzzyChoice
 
 
@@ -14,18 +14,14 @@ class UserFactory(factory.django.DjangoModelFactory):
         model = User
 
 
-class TeacherFactory(factory.django.DjangoModelFactory):
+class ProfileFactory(factory.django.DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
-    profession = factory.fuzzy.FuzzyChoice(PROFESSION_CHOICES)
+    profession = FuzzyChoice(PROFESSION_CHOICES)
+
+    class Meta:
+        model = Profile
 
 
-class StudentFactory(factory.django.DjangoModelFactory):
-    user = factory.SubFactory(UserFactory)
+class UserWithProfileFactory(UserFactory):
+    profile = factory.RelatedFactory(ProfileFactory, factory_related_name='user')
 
-
-class UserTeacherFactory(UserFactory):
-    profile = factory.RelatedFactory(TeacherFactory, factory_related_name="user")
-
-
-class UserStudentFactory(UserFactory):
-    profile = factory.RelatedFactory(StudentFactory, factory_related_name="user")
