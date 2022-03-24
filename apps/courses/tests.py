@@ -31,7 +31,7 @@ class CourseViewSetAPITest(APITestCase):
         self.assertTrue(Course.objects.filter(name=payload["name"]).exists())
 
 
-class UploadCourseFilesAPITest(APITestCase):
+class UploadCourseFileAPITest(APITestCase):
     def test_it_uploads_file(self):
         course = CourseFactory()
         with open(f"{Path(__file__).resolve().parent}/test_files/dummy.zip", "rb") as file:
@@ -82,7 +82,7 @@ class HomeworkTaskCreateTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
-class UploadHomeworkTaskFilesAPITest(APITestCase):
+class UploadHomeworkTaskFileAPITest(APITestCase):
     def test_it_uploads_file(self):
         course = CourseFactory()
         homework_task = HomeworkTaskFactory(course=course)
@@ -122,7 +122,7 @@ class HomeworkCreateTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
-class UploadHomeworkFilesAPITest(APITestCase):
+class UploadHomeworkFileAPITest(APITestCase):
     def test_it_uploads_file(self):
         course = CourseFactory()
         homework_task = HomeworkTaskFactory(course=course)
