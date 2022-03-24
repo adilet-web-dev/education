@@ -31,20 +31,22 @@ class Course(models.Model):
     )
 
     youtube_link = models.URLField()
-    files = models.FileField(
+    file = models.FileField(
         upload_to='courses_files/',
-        verbose_name="course files",
+        verbose_name="course file",
         validators=[FileExtensionValidator(["zip", "rar"])],
-        help_text="upload files compressed to zip or rar",
+        help_text="upload file compressed to zip or rar",
         blank=True,
         null=True
     )
+
+    students = models.ManyToManyField(Profile, related_name="courses")
 
 
 class HomeworkTask(models.Model):
     course = models.ForeignKey(
         Course,
-        related_name="courses",
+        related_name="homework_tasks",
         on_delete=models.CASCADE
     )
     stage = models.PositiveIntegerField(default=0)
@@ -52,11 +54,11 @@ class HomeworkTask(models.Model):
 
     description = models.TextField()
 
-    files = models.FileField(
+    file = models.FileField(
         upload_to='homework_tasks/',
-        verbose_name="homework task files",
+        verbose_name="homework task file",
         validators=[FileExtensionValidator(["zip", "rar"])],
-        help_text="upload files compressed to zip or rar",
+        help_text="upload file compressed to zip or rar",
         null=True,
         blank=True
     )
@@ -79,11 +81,11 @@ class Homework(models.Model):
 
     text = models.TextField()
 
-    files = models.FileField(
+    file = models.FileField(
         upload_to='homeworks/',
-        verbose_name="homework files",
+        verbose_name="homework file",
         validators=[FileExtensionValidator(["zip", "rar"])],
-        help_text="upload files compressed to zip or rar",
+        help_text="upload file compressed to zip or rar",
         null=True,
         blank=True
     )
