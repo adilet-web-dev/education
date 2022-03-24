@@ -13,6 +13,7 @@ python-dotenv = "*"
 dj-database-url = "*"
 drf-yasg = "*"
 pillow = "*"
+django-voting = "*"
 
 [dev-packages]
 

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # third party
     'rest_framework',
     'drf_yasg',
+    'voting',
     # local
     'apps.courses.apps.CoursesConfig',
     'apps.users.apps.UsersConfig'

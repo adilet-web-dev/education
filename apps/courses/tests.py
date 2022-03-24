@@ -3,6 +3,7 @@ from pathlib import Path
 from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
 from django.utils import timezone
+from voting.models import Vote
 
 from apps.users.factories import UserWithProfileFactory
 from .models import Course, HomeworkTask
@@ -29,6 +30,35 @@ class CourseViewSetAPITest(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(Course.objects.filter(name=payload["name"]).exists())
+
+    def test_it_upvotes_course(self):
+        course = CourseFactory()
+        course.students.add(self.user.profile)
+
+        response = self.client.post(f"/api/courses/{course.id}/upvote/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        user_vote = Vote.objects.get_for_user(course, self.user)
+        self.assertEqual(user_vote.vote, +1)
+
+    def test_it_downvotes_course(self):
+        course = CourseFactory()
+        course.students.add(self.user.profile)
+
+        response = self.client.post(f"/api/courses/{course.id}/downvote/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        user_vote = Vote.objects.get_for_user(course, self.user)
+        self.assertEqual(user_vote.vote, -1)
+
+    def test_non_course_student_cannot_vote(self):
+        course = CourseFactory()
+
+        response = self.client.post(f"/api/courses/{course.id}/upvote/")
+        self.assertEqual(response.status_code, 403)
+        response = self.client.post(f"/api/courses/{course.id}/downvote/")
+        self.assertEqual(response.status_code, 403)
+
 
 
 class UploadCourseFileAPITest(APITestCase):
