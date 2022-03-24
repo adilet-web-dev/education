@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'voting',
+    'django_extensions',
     # local
     'apps.courses.apps.CoursesConfig',
     'apps.users.apps.UsersConfig'
