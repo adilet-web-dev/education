@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # third party
     'rest_framework',
     'drf_yasg',
+    'voting',
     'django_extensions',
     # local
     'apps.courses.apps.CoursesConfig',

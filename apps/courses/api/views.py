@@ -15,7 +15,7 @@ class HomeworkTaskCreateAPI(CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
-        course = get_object_or_404(Course, id=kwargs["course_id"])
+        course = self.get_object()
         if request.user.profile != course.author:
             return Response(status=403, data={"message": "only author of course can create homework task"})
         else:
@@ -24,6 +24,9 @@ class HomeworkTaskCreateAPI(CreateAPIView):
     def perform_create(self, serializer):
         course = get_object_or_404(Course, id=self.kwargs["course_id"])
         serializer.save(course=course)
+
+    def get_object(self):
+        return get_object_or_404(Course, id=self.kwargs.get("course_id"))
 
 
 class HomeworkCreateAPI(CreateAPIView):
