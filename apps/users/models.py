@@ -14,14 +14,12 @@ class User(AbstractUser):
     pass
 
 
-class TeacherProfile(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profession = models.CharField(max_length=50, choices=PROFESSION_CHOICES)
     rating = models.IntegerField(default=0)
 
-
-class StudentProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    subscribers = models.ManyToManyField("Profile", related_name="subscribes")
 
 
 class TemporaryUser(models.Model):
