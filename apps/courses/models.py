@@ -16,6 +16,7 @@ class Course(models.Model):
     description = models.TextField()
     profession = models.CharField(max_length=50, choices=PROFESSION_CHOICES)
     cost = models.PositiveIntegerField()
+    created_at = models.DateTimeField(blank=True)
 
     author = models.ForeignKey(
         Profile,
