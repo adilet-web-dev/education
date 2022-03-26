@@ -14,6 +14,7 @@ class CourseFactory(factory.django.DjangoModelFactory):
     cost = fuzzy.FuzzyInteger(100, 100_000)
     author = factory.SubFactory(ProfileFactory)
     youtube_link = factory.Faker("url")
+    created_at = fuzzy.FuzzyDateTime(timezone.now() - timezone.timedelta(days=3), timezone.now())
 
     class Meta:
         model = Course
@@ -32,7 +33,7 @@ class HomeworkTaskFactory(factory.django.DjangoModelFactory):
 class HomeworkFactory(factory.django.DjangoModelFactory):
     homework_task = factory.SubFactory(HomeworkTaskFactory)
     student = factory.SubFactory(ProfileFactory)
-    uploaded_at = fuzzy.BaseFuzzyDateTime(timezone.now(), timezone.now() + timezone.timedelta(days=1))
+    uploaded_at = fuzzy.BaseFuzzyDateTime(timezone.now() - timezone.timedelta(days=1), timezone.now())
 
     class Meta:
         model = Homework

@@ -12,6 +12,7 @@ class CourseSerializer(ModelSerializer):
             "cost",
             "cover_image",
             "youtube_link",
+            "created_at"
         ]
 
         model = Course

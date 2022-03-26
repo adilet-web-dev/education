@@ -59,7 +59,6 @@ class CourseViewSetAPITest(APITestCase):
         self.assertEqual(response.status_code, 403)
 
 
-
 class UploadCourseFileAPITest(APITestCase):
     def test_it_uploads_file(self):
         course = CourseFactory()
@@ -72,3 +71,22 @@ class UploadCourseFileAPITest(APITestCase):
         self.assertEqual(response.status_code, 201)
         course.refresh_from_db()
         self.assertNotEqual(course.file, None)
+
+
+class UsersCourseFeedAPITest(APITestCase):
+    def setUp(self) -> None:
+        self.user = UserWithProfileFactory()
+        self.client.force_login(self.user)
+
+    def test_it_responses_courses_from_only_subscribed_users(self):
+        user = UserWithProfileFactory()
+        CourseFactory.create_batch(3)
+        courses = CourseFactory.create_batch(2, author=user.profile)
+
+        self.user.profile.subscribes.add(user.profile)
+
+        response = self.client.get("/api/courses/feed/")
+
+        self.assertContains(response, courses[0].name)
+        self.assertContains(response, courses[1].name)
+        self.assertEqual(len(response.data), len(courses))
