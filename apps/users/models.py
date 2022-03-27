@@ -28,7 +28,7 @@ class TemporaryUser(models.Model):
     email = models.EmailField()
     username = models.CharField(max_length=255)
     password = models.CharField(max_length=40)
-    verification_code = models.SmallIntegerField(blank=True)
+    verification_code = models.IntegerField(blank=True)
 
     def save(self, *args, **kwargs):
         self.verification_code = randint(10_000, 99_999)

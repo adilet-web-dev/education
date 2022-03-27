@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party
     'rest_framework',
+    'django_extensions',
     # local
     'apps.courses.apps.CoursesConfig',
     'apps.users.apps.UsersConfig'
