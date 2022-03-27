@@ -33,6 +33,12 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG_MODE") == "True"
 ALLOWED_HOSTS = []
 
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS") or True
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
 
 # Application definition
 
@@ -45,7 +51,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party
     'rest_framework',
-    'rest_registration',
     # local
     'apps.courses.apps.CoursesConfig',
     'apps.users.apps.UsersConfig'
@@ -106,14 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-REST_REGISTRATION = {
-    'REGISTER_VERIFICATION_URL': 'http://localhost:8000/verify-user/',
-    'RESET_PASSWORD_VERIFICATION_URL': 'http://localhost:8000/reset-password/',
-    'REGISTER_EMAIL_VERIFICATION_URL': 'http://localhost:8000/verify-email/',
-
-    'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
-}
 
 AUTH_USER_MODEL = "users.User"
 

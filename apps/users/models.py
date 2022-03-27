@@ -1,4 +1,5 @@
 import json
+from random import randint
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
@@ -22,3 +23,13 @@ class TeacherProfile(models.Model):
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+
+class TemporaryUser(models.Model):
+    email = models.EmailField()
+    username = models.CharField(max_length=255)
+    password = models.CharField(max_length=40)
+    verification_code = models.SmallIntegerField(blank=True)
+
+    def save(self, *args, **kwargs):
+        self.verification_code = randint(10_000, 99_999)
+        super(TemporaryUser, self).save(*args, **kwargs)

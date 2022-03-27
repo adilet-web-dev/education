@@ -12,7 +12,6 @@ django-extensions = "*"
 python-dotenv = "*"
 dj-database-url = "*"
 drf-yasg = "*"
-django-rest-registration = "*"
 
 [dev-packages]
 
