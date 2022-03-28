@@ -1,4 +1,5 @@
 from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView, ListAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,7 +10,7 @@ from django.shortcuts import get_object_or_404
 
 from .serializers import TemporaryUserSerializer, ProfileSerializer
 from apps.users.models import User, TemporaryUser, Profile
-from apps.users.permissions import OnlyPersonalDataOwnerOrReadOnly
+from apps.courses.api.serializers import CourseSerializer
 
 
 class RegisterUserAPIView(CreateAPIView):
@@ -63,6 +64,15 @@ class VerifyEmailAPIView(APIView):
 class RetrieveUpdateProfileAPIView(RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
         return self.request.user.profile
+
+
+class UserPurchasedCoursesListAPIView(ListAPIView):
+    serializer_class = CourseSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return self.request.user.profile.courses
