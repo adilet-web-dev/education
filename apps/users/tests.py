@@ -1,4 +1,4 @@
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
 
 from apps.users.factories import UserWithProfileFactory
@@ -37,3 +37,22 @@ class SubscribeUserAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         user.refresh_from_db()
         self.assertEqual(user.profile.subscribers.count(), 0)
+
+
+class ProfileUpdateAPITest(APITestCase):
+    def setUp(self) -> None:
+        self.user = UserWithProfileFactory()
+        self.client.force_login(self.user)
+
+    def test_update_profile(self):
+        payload = {
+            "short_info": "some short info"
+        }
+        response = self.client.patch("/api/account/profile/", payload)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.user.refresh_from_db()
+        self.assertEqual(self.user.profile.short_info, payload["short_info"])
+
+
+

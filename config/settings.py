@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'voting',
     'django_extensions',
+    'guardian',
     # local
     'apps.courses.apps.CoursesConfig',
     'apps.users.apps.UsersConfig'
@@ -114,6 +115,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+)
 
 AUTH_USER_MODEL = "users.User"
 

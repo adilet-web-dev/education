@@ -15,6 +15,7 @@ drf-yasg = "*"
 ipython = "*"
 pillow = "*"
 django-voting = "*"
+django-guardian = "*"
 
 [dev-packages]
 

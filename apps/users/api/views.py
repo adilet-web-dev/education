@@ -1,4 +1,4 @@
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView, ListAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -7,8 +7,9 @@ from django.core.mail import send_mail
 from django.utils.translation import gettext as _
 from django.shortcuts import get_object_or_404
 
-from .serializers import TemporaryUserSerializer
-from apps.users.models import User, TemporaryUser
+from .serializers import TemporaryUserSerializer, ProfileSerializer
+from apps.users.models import User, TemporaryUser, Profile
+from apps.users.permissions import OnlyPersonalDataOwnerOrReadOnly
 
 
 class RegisterUserAPIView(CreateAPIView):
@@ -57,3 +58,11 @@ class VerifyEmailAPIView(APIView):
         else:
             data = {"message": _("wrong verification code")}
             return Response(status=status.HTTP_403_FORBIDDEN, data=data)
+
+
+class RetrieveUpdateProfileAPIView(RetrieveUpdateAPIView):
+    serializer_class = ProfileSerializer
+    queryset = Profile.objects.all()
+
+    def get_object(self):
+        return self.request.user.profile

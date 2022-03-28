@@ -18,6 +18,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profession = models.CharField(max_length=50, choices=PROFESSION_CHOICES)
     rating = models.IntegerField(default=0)
+    work_experience = models.TextField(blank=True, null=True)
+    short_info = models.CharField(max_length=255, blank=True, null=True)
 
     subscribers = models.ManyToManyField("Profile", related_name="subscribes")
 
