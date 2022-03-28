@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'django_extensions',
     # local
     'apps.courses.apps.CoursesConfig',
-    'apps.users.apps.UsersConfig'
+    'apps.users.apps.UsersConfig',
+    'apps.payments.apps.PaymentsConfig'
 ]
 
 MIDDLEWARE = [
