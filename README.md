@@ -32,6 +32,10 @@ DEFAULT_FROM_EMAIL=default_from_email
 python manage.py migrate
 python manage.py runserver
 ```
+так же запустите месячные задания
+```
+manage.py runjobs monthly
+```
 
 ###Описание
 документация API доступна в урлах `/api/swagger/` и `/api/redoc/`
