@@ -16,6 +16,7 @@ from apps.courses.api.serializers import CourseSerializer
 class RegisterUserAPIView(CreateAPIView):
     """
     1 step registration
+
     get email, username, password fields as usual, but saves it in TemporaryUser model
     It sends verification code to that email
     """
@@ -56,6 +57,7 @@ class RegisterUserAPIView(CreateAPIView):
 class VerifyEmailAPIView(APIView):
     """
     2 step registration
+
     checks verification code sent to user email, if it's True
     it creates regular User from temporary user
     """
