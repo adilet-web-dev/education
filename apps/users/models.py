@@ -33,6 +33,8 @@ class Profile(models.Model):
         blank=True
     )
 
+    free_courses_number = models.SmallIntegerField(default=10)
+
     subscribers = models.ManyToManyField("Profile", related_name="subscribes")
 
 

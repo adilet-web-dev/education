@@ -21,6 +21,6 @@ class Payment(models.Model):
     )
 
     amount = models.IntegerField(blank=True)
-    datetime = models.DateTimeField(blank=True)
+    datetime = models.DateTimeField(auto_now_add=True)
     completed = models.BooleanField(default=False)
 
