@@ -1,13 +1,9 @@
-import json
 from random import randint
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-from config.settings import BASE_DIR
-
-with open(f"{BASE_DIR}/professions.json", "r") as file:
-    PROFESSION_CHOICES = list(json.loads(file.read()).items())
+from data_management.models import PROFESSION_CHOICES
 
 
 class User(AbstractUser):

@@ -1,14 +1,8 @@
-import json
-
 from django.db import models
 from django.core.validators import FileExtensionValidator
 
-from config.settings import BASE_DIR
 from apps.users.models import Profile
-
-
-with open(f"{BASE_DIR}/professions.json", "r") as file:
-    PROFESSION_CHOICES = list(json.loads(file.read()).items())
+from data_management.models import PROFESSION_CHOICES
 
 
 class Course(models.Model):
