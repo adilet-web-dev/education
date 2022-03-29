@@ -54,10 +54,12 @@ INSTALLED_APPS = [
     'drf_yasg',
     'voting',
     'django_extensions',
+    'solo',
     # local
     'apps.courses.apps.CoursesConfig',
     'apps.users.apps.UsersConfig',
-    'apps.payments.apps.PaymentsConfig'
+    'apps.payments.apps.PaymentsConfig',
+    'data_management.apps.DataManagementConfig',
 ]
 
 MIDDLEWARE = [

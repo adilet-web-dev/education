@@ -26,7 +26,12 @@ class Profile(models.Model):
     rating = models.IntegerField(default=0)
     work_experience = models.TextField(blank=True, null=True)
     short_info = models.CharField(max_length=255, blank=True, null=True)
-    app_subscription_mode = models.CharField(max_length=4, choices=APP_SUBSCRIPTION_MODE_CHOICES)
+    app_subscription_mode = models.CharField(
+        max_length=4,
+        choices=APP_SUBSCRIPTION_MODE_CHOICES,
+        null=True,
+        blank=True
+    )
 
     subscribers = models.ManyToManyField("Profile", related_name="subscribes")
 

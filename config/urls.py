@@ -13,4 +13,5 @@ urlpatterns = [
     path('api/', include("config.swagger")),
     path('api/users/', include("apps.users.urls")),
     path('api/account/', include("apps.users.account_urls")),
+    path('api/payments/', include("apps.payments.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
