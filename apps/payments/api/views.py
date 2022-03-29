@@ -15,6 +15,10 @@ from apps.courses.models import Course
 
 
 class AppSubscriptionPaymentAPI(CreateAPIView):
+    """
+    Creates payment object but not completed, must be confirmed by side payment service.
+    query parameter must be either "base" or "pro"
+    """
     permission_classes = [IsAuthenticated]
     serializer_class = PaymentSerializer
 
@@ -36,6 +40,10 @@ class AppSubscriptionPaymentAPI(CreateAPIView):
 
 
 class CoursePurchaseAPI(CreateAPIView):
+    """
+    Creates payment object but not completed, must be confirmed by side payment service.
+    if course is free and user has base subscription user can have only 10 free courses per month
+    """
     permission_classes = [IsAuthenticated]
     serializer_class = PaymentSerializer
 
@@ -88,6 +96,11 @@ class CoursePurchaseAPI(CreateAPIView):
 
 
 class ConfirmCoursePurchaseAPI(APIView):
+    """
+    Payment confirmation by payment service and final execution of purchase,
+    WARNING! Not integrated with any payment service
+    if it's confirmed course will be available for user
+    """
     def post(self, request: Request, *args, **kwargs):
         payment = get_object_or_404(Payment, pk=request.data.get("order_id"))
         try:
@@ -108,6 +121,10 @@ class ConfirmCoursePurchaseAPI(APIView):
 
 
 class ConfirmAppSubscriptionPaymentAPI(APIView):
+    """
+    Payment confirmation by payment service and final execution of subscription,
+    WARNING! Not integrated with any payment service
+    """
     def post(self, request: Request, *args, **kwargs):
         payment = get_object_or_404(Payment, pk=request.data.get("order_id"))
         profile = payment.client.profile

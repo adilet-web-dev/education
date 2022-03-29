@@ -14,6 +14,11 @@ from apps.courses.api.serializers import CourseSerializer
 
 
 class RegisterUserAPIView(CreateAPIView):
+    """
+    1 step registration
+    get email, username, password fields as usual, but saves it in TemporaryUser model
+    It sends verification code to that email
+    """
     serializer_class = TemporaryUserSerializer
 
     def post(self, request, *args, **kwargs):
@@ -49,6 +54,11 @@ class RegisterUserAPIView(CreateAPIView):
 
 
 class VerifyEmailAPIView(APIView):
+    """
+    2 step registration
+    checks verification code sent to user email, if it's True
+    it creates regular User from temporary user
+    """
     def post(self, request, *args, **kwargs):
         temp_user = get_object_or_404(TemporaryUser, email=request.data.get("email"))
         if request.data.get("verification_code") == temp_user.verification_code:
@@ -62,6 +72,9 @@ class VerifyEmailAPIView(APIView):
 
 
 class RetrieveUpdateProfileAPIView(RetrieveUpdateAPIView):
+    """
+    3 step registration and profile update
+    """
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
     permission_classes = [IsAuthenticated]
