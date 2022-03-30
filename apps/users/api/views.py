@@ -13,7 +13,7 @@ from apps.users.models import User, TemporaryUser, Profile
 from apps.courses.api.serializers import CourseSerializer
 
 
-class RegisterUserAPIView(CreateAPIView):
+class RegisterUserAPI(CreateAPIView):
     """
     1 step registration
 
@@ -54,7 +54,7 @@ class RegisterUserAPIView(CreateAPIView):
             return Response(status=status.HTTP_400_BAD_REQUEST, data=data)
 
 
-class VerifyEmailAPIView(APIView):
+class VerifyEmailAPI(APIView):
     """
     2 step registration
 
@@ -73,7 +73,7 @@ class VerifyEmailAPIView(APIView):
             return Response(status=status.HTTP_403_FORBIDDEN, data=data)
 
 
-class RetrieveUpdateProfileAPIView(RetrieveUpdateAPIView):
+class RetrieveUpdateProfileAPI(RetrieveUpdateAPIView):
     """
     3 step registration and profile update
     """
@@ -85,9 +85,17 @@ class RetrieveUpdateProfileAPIView(RetrieveUpdateAPIView):
         return self.request.user.profile
 
 
-class UserPurchasedCoursesListAPIView(ListAPIView):
+class UserPurchasedCoursesListAPI(ListAPIView):
     serializer_class = CourseSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return self.request.user.profile.courses
+
+
+class SearchUserListAPI(ListAPIView):
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Profile.objects.filter(user__username__icontains=self.kwargs["name"])

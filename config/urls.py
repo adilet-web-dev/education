@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 from . import settings
-from apps.users.api.views import RetrieveUpdateProfileAPIView
+from apps.users.api.views import RetrieveUpdateProfileAPI
 
 
 urlpatterns = [

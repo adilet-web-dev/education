@@ -1,9 +1,15 @@
 from django.urls import path
 
-from .api.views import RegisterUserAPIView, VerifyEmailAPIView, RetrieveUpdateProfileAPIView
+from .api.views import (
+    RegisterUserAPI,
+    VerifyEmailAPI,
+    RetrieveUpdateProfileAPI,
+    SearchUserListAPI
+)
 
 
 urlpatterns = [
-    path("register/", RegisterUserAPIView.as_view()),
-    path("verify-email/", VerifyEmailAPIView.as_view()),
+    path("register/", RegisterUserAPI.as_view()),
+    path("verify-email/", VerifyEmailAPI.as_view()),
+    path("searce&name=<str:name>/", )
 ]

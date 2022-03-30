@@ -1,8 +1,8 @@
 from django.urls import path
-from .api.views import RetrieveUpdateProfileAPIView, UserPurchasedCoursesListAPIView
+from .api.views import RetrieveUpdateProfileAPI, UserPurchasedCoursesListAPI
 
 
 urlpatterns = [
-    path("profile/", RetrieveUpdateProfileAPIView.as_view()),
-    path("courses/", UserPurchasedCoursesListAPIView.as_view())
+    path("profile/", RetrieveUpdateProfileAPI.as_view()),
+    path("courses/", UserPurchasedCoursesListAPI.as_view())
 ]
