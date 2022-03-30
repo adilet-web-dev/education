@@ -2,12 +2,13 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework import status
 from django.utils import timezone
 
 from voting.models import Vote
 
-from apps.courses.models import Course
+from apps.courses.models import Course, Comment
 from .serializers import CourseSerializer
 from .paginations import StandardResultsSetPagination
 from apps.courses.permissions import IsCourseStudent
@@ -44,3 +45,19 @@ class CourseViewSet(ModelViewSet):
         courses = Course.objects.filter(author__in=request.user.profile.subscribes.all()).order_by("-created_at")
         serializer = self.serializer_class(courses, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    @action(methods=["POST"], detail=True, url_path="add-comment")
+    def add_comment(self, request: Request, pk=None):
+        course = self.get_object()
+        try:
+            comment = request.data["comment"]
+        except KeyError:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "there must be comment"})
+
+        Comment.objects.create(
+            course=course,
+            author=self.request.user.profile,
+            body=comment
+        )
+
+        return Response(status=status.HTTP_201_CREATED)

@@ -86,3 +86,19 @@ class Homework(models.Model):
     )
 
     uploaded_at = models.DateTimeField()
+
+
+class Comment(models.Model):
+    course = models.ForeignKey(
+        Course,
+        related_name="courses",
+        on_delete=models.CASCADE
+    )
+    author = models.ForeignKey(
+        Profile,
+        related_name="comments",
+        on_delete=models.CASCADE
+    )
+
+    body = models.CharField(max_length=355)
+    created_at = models.DateTimeField(auto_now_add=True)
