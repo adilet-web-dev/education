@@ -3,6 +3,7 @@ from rest_framework.serializers import ModelSerializer
 from apps.courses.models import Course, HomeworkTask, Homework
 
 
+
 class CourseSerializer(ModelSerializer):
     class Meta:
         fields = [

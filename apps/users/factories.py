@@ -1,7 +1,9 @@
 import factory
-from django.db.models.signals import post_save
-from .models import User, PROFESSION_CHOICES, Profile
 from factory.fuzzy import FuzzyChoice
+from django.db.models.signals import post_save
+
+from .models import User, Profile
+from data_management.factories import ProfessionFactory
 
 
 @factory.django.mute_signals(post_save)
@@ -16,7 +18,7 @@ class UserFactory(factory.django.DjangoModelFactory):
 
 class ProfileFactory(factory.django.DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
-    profession = FuzzyChoice(PROFESSION_CHOICES)
+    profession = factory.SubFactory(ProfessionFactory)
 
     class Meta:
         model = Profile

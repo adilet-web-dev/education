@@ -2,13 +2,16 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 
 from apps.users.models import Profile
-from data_management.models import PROFESSION_CHOICES
+from data_management.models import Profession
 
 
 class Course(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-    profession = models.CharField(max_length=50, choices=PROFESSION_CHOICES)
+    profession = models.ForeignKey(
+        Profession,
+        on_delete=models.CASCADE
+    )
     cost = models.PositiveIntegerField()
     created_at = models.DateTimeField(blank=True)
 

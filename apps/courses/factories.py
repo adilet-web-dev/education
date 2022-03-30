@@ -2,15 +2,16 @@ import factory
 from factory import fuzzy
 from django.utils import timezone
 
-from .models import Course, PROFESSION_CHOICES, Homework, HomeworkTask
+from .models import Course, Homework, HomeworkTask
 from apps.users.factories import ProfileFactory
+from data_management.factories import ProfessionFactory
 
 
 class CourseFactory(factory.django.DjangoModelFactory):
 
     name = factory.Faker("name")
     description = factory.Faker("text")
-    profession = fuzzy.FuzzyChoice(PROFESSION_CHOICES)
+    profession = factory.SubFactory(ProfessionFactory)
     cost = fuzzy.FuzzyInteger(100, 100_000)
     author = factory.SubFactory(ProfileFactory)
     youtube_link = factory.Faker("url")

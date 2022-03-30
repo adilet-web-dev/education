@@ -1,7 +1,8 @@
-from rest_framework.serializers import ModelSerializer
-from rest_framework.serializers import SerializerMethodField
+from rest_framework.serializers import ModelSerializer, SerializerMethodField, CharField
+
 
 from apps.users.models import TemporaryUser, Profile
+from data_management.models import Profession
 
 
 class TemporaryUserSerializer(ModelSerializer):

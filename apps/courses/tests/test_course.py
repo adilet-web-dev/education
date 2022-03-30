@@ -7,6 +7,7 @@ from voting.models import Vote
 from apps.users.factories import UserWithProfileFactory
 from apps.courses.models import Course
 from apps.courses.factories import CourseFactory
+from data_management.factories import ProfessionFactory
 
 
 # Create your tests here.
@@ -16,11 +17,12 @@ class CourseViewSetAPITest(APITestCase):
         self.client.force_login(self.user)
 
     def test_it_creates_course(self):
+        profession = ProfessionFactory()
 
         payload = {
             "name": "test name",
             "description": "some description",
-            "profession": "programmer",
+            "profession": profession.id,
             "cost": 0,
             "youtube_link": "https://youtube.com/watch=zzlhfghhd",
         }
