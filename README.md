@@ -36,11 +36,23 @@ python manage.py runserver
 ```
 manage.py runjobs monthly
 ```
+LIVE
+heroku
+```
+https://test-education-app.herokuapp.com/
+```
+токен `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NzA4NTMwLCJpYXQiOjE2NDg3MDgyMzAsImp0aSI6ImZlYWE1OWI3ZDVhODQzMjBiNDFjMTJjODhhMWRmMzI1IiwidXNlcl9pZCI6MX0.w5ZbIzucm5vW24Hbj5OtOf1XsfKoeB9ju3-MGouUCSw`
 
+Откройте виртуальное окружение при помощи pipenv и скачайте зависимисти
+```shell
+pipenv shell
+pipenv install
+```
 ###Описание
 документация API доступна в урлах `/api/swagger/` и `/api/redoc/`
 
 (пример `localhost:8000/swagger`)
+так же доступно в Хероку
 
 __Внимание!__
 На данный момент платежная система не работает
