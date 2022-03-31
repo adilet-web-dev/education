@@ -18,6 +18,7 @@ django-voting = "*"
 django-solo = "*"
 gunicorn = "*"
 djangorestframework-simplejwt = "*"
+whitenoise = "*"
 
 [dev-packages]
 
