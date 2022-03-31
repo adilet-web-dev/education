@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 
-from data_management.models import AppManagement
+from app_management.models import AppManagement
 from .serializers import PaymentSerializer
 from apps.payments.models import Payment
 from apps.courses.models import Course

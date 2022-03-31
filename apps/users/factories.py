@@ -3,7 +3,7 @@ from factory.fuzzy import FuzzyChoice
 from django.db.models.signals import post_save
 
 from .models import User, Profile
-from data_management.factories import ProfessionFactory
+from app_management.factories import ProfessionFactory
 
 
 @factory.django.mute_signals(post_save)

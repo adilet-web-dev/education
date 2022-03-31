@@ -7,7 +7,7 @@ from voting.models import Vote
 from apps.users.factories import UserWithProfileFactory
 from apps.courses.models import Course
 from apps.courses.factories import CourseFactory
-from data_management.factories import ProfessionFactory
+from app_management.factories import ProfessionFactory
 
 
 # Create your tests here.

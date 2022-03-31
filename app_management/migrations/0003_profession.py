@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('data_management', '0002_remove_appmanagement_professions_and_more'),
+        ('app_management', '0002_remove_appmanagement_professions_and_more'),
     ]
 
     operations = [

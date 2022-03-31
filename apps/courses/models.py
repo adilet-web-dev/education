@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 
 from apps.users.models import Profile
-from data_management.models import Profession
+from app_management.models import Profession
 
 
 class Course(models.Model):

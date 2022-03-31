@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('data_management', '0003_profession'),
+        ('app_management', '0003_profession'),
         ('users', '0005_profile_free_courses_number'),
     ]
 
@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='profile',
             name='profession',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='data_management.profession'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_management.profession'),
         ),
     ]

@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from .models import Course, Homework, HomeworkTask
 from apps.users.factories import ProfileFactory
-from data_management.factories import ProfessionFactory
+from app_management.factories import ProfessionFactory
 
 
 class CourseFactory(factory.django.DjangoModelFactory):

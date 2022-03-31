@@ -3,7 +3,7 @@ from random import randint
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-from data_management.models import Profession
+from app_management.models import Profession
 
 
 class User(AbstractUser):

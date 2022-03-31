@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'apps.courses.apps.CoursesConfig',
     'apps.users.apps.UsersConfig',
     'apps.payments.apps.PaymentsConfig',
-    'data_management.apps.DataManagementConfig',
+    'app_management.apps.AppManagementConfig',
 ]
 
 MIDDLEWARE = [
