@@ -16,6 +16,8 @@ ipython = "*"
 pillow = "*"
 django-voting = "*"
 django-solo = "*"
+gunicorn = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

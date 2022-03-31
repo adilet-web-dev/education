@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'voting',
     'django_extensions',
     'solo',
+    'rest_framework_simplejwt',
     # local
     'apps.courses.apps.CoursesConfig',
     'apps.users.apps.UsersConfig',
@@ -117,6 +118,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
 AUTH_USER_MODEL = "users.User"
 
